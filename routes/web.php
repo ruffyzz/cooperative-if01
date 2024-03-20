@@ -16,3 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/home', function () {
+    echo "Alamat Saya di Bandung!!";
+});
+
+Route::get('/my-city/{city?}', function ($city = "Bandung") {
+    echo "Kota kelahiran saya di " . $city;
+});
+
+Route::get('/get-student/{name?}/{code?}', function ($name = "Nama Siswa",$code = "220414014") {
+    echo "Nama saya adalah " . $name; 
+    echo "<br> NRP " . $code;
+});
