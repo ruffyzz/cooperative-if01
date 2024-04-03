@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CustomerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +25,11 @@ Route::get('/my-city/{city?}', function ($city = "Bandung") {
     echo "Kota kelahiran saya di " . $city;
 });
 
-Route::get('/get-student/{name?}/{code?}', function ($name = "Nama Siswa",$code = "220414014") {
-    echo "Nama saya adalah " . $name; 
-    echo "<br> NRP " . $code;
-});
+
+Route::get('/nasabah/index',[CustomerController::class,'index']);
+
+Route::get('/get-name/{name?}',[CustomerController::class,'getName']);
+
+Route::get('/get-student/{name?}/{code?}',[CustomerController::class,'getStudent']);
+
+Route::get('/get-city/{city?}',[CustomerController::class,'getName']);
