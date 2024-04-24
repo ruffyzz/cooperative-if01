@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PersonController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,3 +34,5 @@ Route::get('/get-name/{name?}',[CustomerController::class,'getName']);
 Route::get('/get-student/{name?}/{code?}',[CustomerController::class,'getStudent']);
 
 Route::get('/get-city/{city?}',[CustomerController::class,'getName']);
+
+Route::get('/person/index',[PersonController::class,'index']);
