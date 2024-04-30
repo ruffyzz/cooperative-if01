@@ -11,4 +11,15 @@ class PersonController extends Controller
         $grade = 75;
         return view('people.index',compact('name','grade'));
     }
+
+    public function create(){
+        return view('people.create');
+    }
+
+    public function store(Request $request){
+       
+        $name = $request->name;
+
+        return view('people.show',compact('name'));
+    }
 }

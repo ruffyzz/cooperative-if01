@@ -36,3 +36,7 @@ Route::get('/get-student/{name?}/{code?}',[CustomerController::class,'getStudent
 Route::get('/get-city/{city?}',[CustomerController::class,'getName']);
 
 Route::get('/person/index',[PersonController::class,'index']);
+
+Route::get('/person/create',[PersonController::class,'create'])->name('person.create');
+
+Route::post('/person/store',[PersonController::class,'store'])->name('person.store');
