@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\PersonController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,25 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    echo "Alamat Saya di Bandung!!";
-});
-
-Route::get('/my-city/{city?}', function ($city = "Bandung") {
-    echo "Kota kelahiran saya di " . $city;
-});
-
-
-Route::get('/nasabah/index',[CustomerController::class,'index']);
-
-Route::get('/get-name/{name?}',[CustomerController::class,'getName']);
-
-Route::get('/get-student/{name?}/{code?}',[CustomerController::class,'getStudent']);
-
-Route::get('/get-city/{city?}',[CustomerController::class,'getName']);
-
-Route::get('/person/index',[PersonController::class,'index']);
-
-Route::get('/person/create',[PersonController::class,'create'])->name('person.create');
-
-Route::post('/person/store',[PersonController::class,'store'])->name('person.store');
+Route::get('/customer/create', [CustomerController::class, 'create'])->name('customer.create');
+Route::post('/customer/store', [CustomerController::class, 'store'])->name('customer.store');

@@ -13,6 +13,7 @@
 
     <div class="container m-2">
         @yield('content')
+        @yield('pendaftaran')
     </div>
 </body>
 </html>

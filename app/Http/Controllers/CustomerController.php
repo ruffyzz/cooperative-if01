@@ -3,26 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Customer;
 
 class CustomerController extends Controller
 {
-    public function index(){
-        echo "Alamat Saya di Jakarta!!";
+    public function create(){
+        return view('customers.create');
     }
+    public function store(Request $request){
+        $this->validate($request, [
+            'code' => 'required|unique:customers|max:4',
+            'name' => 'required|max:30',
+            'phone' => 'numeric',
+            'address' => 'required',
+        ]);
 
-    public function getName($name){
-        echo "Nama saya adalah " . $name;
+        // ORM --> INSERT/SAVE
+        $customer = new Customer;
+        $customer->code = $request->code;
+        $customer->name = $request->name;
+        $customer->phone = $request->phone;
+        $customer->address = $request->address;
+
+        $customer->save();
     }
-
-    public function getStudent($name,$code){
-        echo "Nama saya adalah " . $name;
-        echo "<br>";
-        echo "NIM saya adalah " . $code;
-    }
-
-    public function getCity($city){
-        echo "Kota kelahiran saya di " . $city;
-    }
-
-    
 }
