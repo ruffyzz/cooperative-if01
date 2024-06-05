@@ -24,7 +24,23 @@ class CustomerController extends Controller
         $customer->name = $request->name;
         $customer->phone = $request->phone;
         $customer->address = $request->address;
-
-        $customer->save();
+        
+        if ($customer->save()) {
+            return redirect()->route('customer.show', $customer->id);
+        } else {
+            dd('Data Gagal Disimpan');
+        }
     }
+    public function show($id)
+    {
+        $customer = Customer::find($id);
+        return view('customers.show',compact('customer'));
+    }
+    
+    public function index()
+    {
+        $customers = Customer::all();
+        return view('customers.index',compact('customers'));
+    }
+
 }

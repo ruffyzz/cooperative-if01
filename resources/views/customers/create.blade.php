@@ -1,30 +1,41 @@
 @extends('layouts.main')
-
 @section('pendaftaran')
-<h1>Pendaftaran Pelanggan</h1>
-<form action="{{ route('customer.store') }}" method="post">
-    @csrf
-    <label for="">Kode Pelanggan</label>
-    <input type="text" name="code" placeholder="Kode Pelanggan" class="form-control">
-    <br>
-    <label for="">Nama Pelanggan</label>
-    <input type="text" name="name" placeholder="Nama Pelanggan" class="form-control">
-    <br>
-    <label for="">Nomor HP Pelanggan</label>
-    <input type="text" name="phone" placeholder="Nomor HP Pelanggan" class="form-control">
-    <br>
-    <label for="">Alamat Pelanggan</label>
-    <input type="text" name="address" placeholder="Alamat Pelanggan" class="form-control">
-    <br>
-    <input type="submit" value="Simpan" class="btn btn-success mt-3">
-</form>
-
 @if (count($errors)>0)
-    <p>ERROR Woi</p>
+    <div class="alert alert-danger"><p>ERROR Woi</p>
     @foreach ($errors->all() as $item)
         <li>{{ $item }}</li>
 
     @endforeach
-
+    </div>
 @endif
+<div class="card">
+    <div class="card-header">
+        Pendaftaran Pelanggan
+    </div>
+    <div class="card-body">
+        <form action="{{ route('customer.store') }}" method="POST">
+        @csrf
+        <div class="mb-2">
+            <label for="">Kode Pelanggan</label>
+            <input type="text" name="code" class="form-control" placeholder="Kode Pelanggan">
+        </div>
+        <div class="mb-2">
+            <label for="">Nama Pelanggan</label>
+            <input type="text" name="name" class="form-control" placeholder="Nama Pelanggan">
+        </div>
+        <div class="mb-2">
+            <label for="">Telepon</label>
+            <input type="text" name="phone" class="form-control" placeholder="Nomor Telepon">
+        </div>
+        <div class="mb-2">
+            <label for="">Alamat</label>
+            <input type="text" name="address" class="form-control" placeholder="Alamat">
+        </div>
+        <div class="mb-2">
+            <input type="submit" value="Simpan">
+        </div>
+        </form>
+    </div>
+</div>
+
 @endsection
