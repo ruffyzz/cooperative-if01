@@ -1,5 +1,11 @@
 @extends('layouts.main')
 @section('content')
+@if ($message = Session::get('success'))
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div>
+    
+@endif
     <div class="card">
         <div class="card-header">
             <a href="{{ route('customer.create') }}" class="btn btn-success float-end">Tambah Data</a>
@@ -11,6 +17,7 @@
                         <th>#</th>
                         <th>Kode</th>
                         <th>Nama</th>
+                        <th>Alamat</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -20,7 +27,16 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $customer->code }}</td>
                             <td>{{ $customer->name }}</td>
-                            <td><a href="{{ route('customer.show', $customer->id) }}" class="btn btn-info btn-sm">Lihat Data</a>
+                            <td>{{ $customer->address }}</td>
+                            <td><a href="{{ route('customer.show', $customer->id) }}" class="btn btn-info btn-sm">Lihat</a>
+                                <a href="{{ route('customer.edit', $customer->id) }}" class="btn btn-warning btn-sm mx-1">Edit</a>
+
+                                <form action="{{ route('customer.destroy',$customer->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" value="Hapus" class="btn btn-danger btn-sm">
+                                </form>
+
                         </tr>
                     @endforeach
                 </tbody>

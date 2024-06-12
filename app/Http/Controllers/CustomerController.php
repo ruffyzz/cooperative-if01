@@ -43,4 +43,41 @@ class CustomerController extends Controller
         return view('customers.index',compact('customers'));
     }
 
+    // Method untuk menampilkan data keform
+    public function edit($id) {
+        $customer = Customer::find($id);
+        return view('customers.edit',compact('customer'));
+    }
+
+    // Method untuk mengubah data
+    public function update(Request $request) {
+        $this->validate($request, [
+            'name' => 'required|max:30',
+            'phone' => 'numeric',
+            'address' => 'required',
+        ]);
+
+        // ORM --> UPDATE/SAVE
+        $customer = Customer::find($request->id);
+        $customer->name = $request->name;
+        $customer->phone = $request->phone;
+        $customer->address = $request->address;
+        
+        if ($customer->save()) {
+            return redirect()->route('customer.index')->with('success','Data Berhasil Disimpan');
+        } else {
+            dd('Data Gagal Disimpan');
+        }
+    }
+
+    // Method untuk menghapus data 
+    public function destroy($id) {
+        $customer = Customer::find($id);
+
+        if($customer->delete()) {
+            return redirect()->route('customer.index')->with('success','Data berhasil Dihapus');
+        } else {
+            dd('Data Gagal Disimpan');
+        }
+    }
 }

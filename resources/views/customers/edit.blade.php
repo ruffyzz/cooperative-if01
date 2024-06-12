@@ -10,26 +10,28 @@
 @endif
 <div class="card">
     <div class="card-header">
-        Pendaftaran Pelanggan
+        Edit Pendaftaran Pelanggan Kode #{{ $customer->code }}
     </div>
     <div class="card-body">
-        <form action="{{ route('customer.store') }}" method="POST">
+        <form action="{{ route('customer.update') }}" method="POST">
         @csrf
-        <div class="mb-2">
-            <label for="">Kode Pelanggan</label>
-            <input type="text" name="code" class="form-control" placeholder="Kode Pelanggan">
-        </div>
+        @method('PUT')
+        <input type="hidden" name="id" value="{{ $customer->id }}">
         <div class="mb-2">
             <label for="">Nama Pelanggan</label>
-            <input type="text" name="name" class="form-control" placeholder="Nama Pelanggan">
+            <input type="text" name="name" class="form-control" placeholder="Nama Pelanggan"
+                value="{{ $customer->name }}">
         </div>
         <div class="mb-2">
             <label for="">Telepon</label>
-            <input type="text" name="phone" class="form-control" placeholder="Nomor Telepon">
+            <input type="text" name="phone" class="form-control" placeholder="Nomor Telepon"
+                value="{{ $customer->phone }}">
         </div>
         <div class="mb-2">
             <label for="">Alamat</label>
-            <input type="text" name="address" class="form-control" placeholder="Jl. XXX">
+            <textarea name="address" id="" cols="30" rows="3" class="form-control" 
+            placeholder="Jl. XXX"{{ $customer->address }}></textarea>
+
         </div>
         <div class="mb-2">
             <input type="submit" value="Simpan">
