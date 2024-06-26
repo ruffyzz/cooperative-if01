@@ -28,7 +28,7 @@
                             <td>{{ $customer->code }}</td>
                             <td>{{ $customer->name }}</td>
                             <td>{{ $customer->address }}</td>
-                            <td><a href="{{ route('customer.show', $customer->id) }}" class="btn btn-info btn-sm">Lihat</a>
+                            <td class='d-flex'><a href="{{ route('customer.show', $customer->id) }}" class="btn btn-info btn-sm">Lihat</a>
                                 <a href="{{ route('customer.edit', $customer->id) }}" class="btn btn-warning btn-sm mx-1">Edit</a>
 
                                 <form action="{{ route('customer.destroy',$customer->id)}}" method="POST">
@@ -36,11 +36,11 @@
                                     @method('DELETE')
                                     <input type="submit" value="Hapus" class="btn btn-danger btn-sm">
                                 </form>
-
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-@endsection
+@endsection 

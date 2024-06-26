@@ -7,10 +7,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Beranda</a>
+            <a class="nav-link" href="{{ route('customer.index') }}">Nasabah</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('customer.index') }}">Nasabah</a>
+            <a class="nav-link" href="{{ route('mandatory-saving.index') }}">Simpanan Wajib</a>
           </li>
         </ul>
     </div>
