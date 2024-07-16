@@ -32,7 +32,7 @@
                                     class="btn btn-primary btn-sm m-1 text-light"><i class='bx bxs-edit'
                                         style='color:#fdfdfd'></i>Edit</a>
                                         <button type="button" class="btn btn-danger btn-sm m-1"
-                                        onclick="confirmDeletion({{ $customer->id }})" hidden>
+                                        onclick="confirmDeletion({{ $customer->id }})">
                                         <i class='bx bx-trash'></i>Hapus
                                     </button>
                             </td>
@@ -47,7 +47,7 @@
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header text-center" style="background-color: #143855; color:white;">
+                    <div class="modal-header text-center" style="background-color: #D8B06D; color:white;">
                         <h5 class="modal-title" id="staticBackdropLabel">Pendaftaran Nasabah</h5>
                     </div>
                     <div class="modal-body">

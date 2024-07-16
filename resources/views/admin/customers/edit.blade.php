@@ -7,7 +7,7 @@
     </div>
 
     <div class="card">
-        <div class="card-header" style="background-color: #143855; color: white;">
+        <div class="card-header" style="background-color: #D8B06D; color: white;">
             Kode Nasabah: #{{ $customer->code }}
         </div>
         <div class="card-body">

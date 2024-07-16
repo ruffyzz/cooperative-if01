@@ -70,7 +70,7 @@
             aria-labelledby="editModalLabel{{ $user->id }}" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header text-center" style="background-color: #143855; color:white;">
+                    <div class="modal-header text-center" style="background-color: #D8B06D; color:white;">
                         <h5 class="modal-title" id="staticBackdropLabel">Edit Role</h5>
                     </div>
                     <div class="modal-body">

@@ -22,9 +22,11 @@
                             Welcome back, {{ auth()->user()->name }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/dashboard">Home</a></li>
-                            <li><a class="dropdown-item" href="{{ route('customer.index') }}">Nasabah</a></li>
-                            <li><a class="dropdown-item" href="{{ route('mandatory-saving.index') }}">Tabungan</a></li>
+                            @can('user')
+
+                            <li><a class="dropdown-item" href="/">Home</a></li>
+                            <li><a class="dropdown-item" href="{{ route('customer.index') }}">Info Nasabah</a></li>
+                            @endcan
                             @can('admin')
                             <li><a class="dropdown-item" href="{{ route('admin-customer.index') }}">Kelola Nasabah</a></li>
                             <li><a class="dropdown-item" href="{{ route('admin-mandatory-saving.index') }}">Kelola Pinjaman</a></li>

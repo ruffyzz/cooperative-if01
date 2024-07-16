@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col mb-4">
+            {{-- <div class="col mb-4">
                 <div class="card h-100">
                     <img src="/img/tabungan.jpg" class="card-img-top" alt="Gambar Tabungan Nasabah"
                         style="height: 200px; object-fit: cover;">
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- <div class="col mb-4">
                 <div class="card h-100">
                     <img src="/img/pinjaman.jpg" class="card-img-top" alt="Gambar Pinjaman Nasabah"

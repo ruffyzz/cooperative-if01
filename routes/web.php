@@ -46,8 +46,8 @@ Route::get('/register',[RegisterController::class, 'index'])->middleware('guest'
 Route::post('/register',[RegisterController::class, 'store']);
 Route::resource('/admin-customer', AdminCustomerController::class)->middleware('admin');
 // Route::get('/dashboard', function(){
-//     return view ('customer.index');
-// })->middleware('auth');
+//      return view ('customer.index');
+//  })->middleware('auth');
 Route::resource('admin-mandatory-saving', AdminMandatorySavingController::class)->middleware('admin');
 Route::resource('/admin-role', AdminRoleController::class)->middleware('admin');
 
