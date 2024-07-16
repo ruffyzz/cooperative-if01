@@ -1,0 +1,41 @@
+
+  .form-signin .form-floating:focus-within {
+    z-index: 2;
+  }
+
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+    background-color: #606060;
+}
+
+.user .user-profil img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.navbar {
+    background-color: #D8B06D !important;
+
+}
+
+.navbar .navbar-brand, /* Ubah warna teks logo */
+.navbar .nav-link {   /* Ubah warna teks link */
+    color: white !important;
+}
+

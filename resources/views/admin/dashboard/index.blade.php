@@ -9,7 +9,7 @@
                         <div class="col-md-2 col-xxl-2">
                             <div class="user-profil">
                                 @if ($customer->image)
-                                    <img src="{{ asset('storage/' . $customer->image) }}" alt="Profile Picture">
+                                    <img src="{{ asset('storage/' . $customer->image) }}" class="img-thumbnail">
                                 @else
                                     <img src="/img/logo.jpg" class="img-thumbnail">
                                 @endif

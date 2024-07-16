@@ -20,7 +20,7 @@ class CreateMandatorySavingsTable extends Migration
             $table->bigInteger('amount');
             $table->timestamps();
 
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('customer_id')->references('id')->on('customers')->ondelete('cascade');
         });
     }
 

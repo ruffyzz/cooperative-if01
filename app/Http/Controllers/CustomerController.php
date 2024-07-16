@@ -2,82 +2,103 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Customer;
+use App\Models\MandatorySaving;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
-    public function create(){
-        return view('customers.create');
-    }
-    public function store(Request $request){
-        $this->validate($request, [
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'image' => 'image|file',
             'code' => 'required|unique:customers|max:4',
             'name' => 'required|max:30',
-            'phone' => 'numeric',
+            'gender' => 'required',
             'address' => 'required',
+            'phone' => 'nullable|numeric',
         ]);
 
-        // ORM --> INSERT/SAVE
-        $customer = new Customer;
-        $customer->code = $request->code;
-        $customer->name = $request->name;
-        $customer->phone = $request->phone;
-        $customer->address = $request->address;
-        
-        if ($customer->save()) {
-            return redirect()->route('customer.show', $customer->id);
-        } else {
-            dd('Data Gagal Disimpan');
+        $validatedData['user_id'] = auth()->user()->id;
+
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('profile');
         }
+
+        Customer::create($validatedData);
+
+        return redirect(route('customer.index'))->with('success', 'Data nasabah berhasil ditambahkan!');
     }
-    public function show($id)
-    {
-        $customer = Customer::find($id);
-        return view('customers.show',compact('customer'));
-    }
-    
+
     public function index()
     {
-        $customers = Customer::all();
-        return view('customers.index',compact('customers'));
+        $userId = Auth::id();
+        $customer = Customer::where('user_id', $userId)->first();
+        $mandatorySavings = $customer ?
+            MandatorySaving::where('customer_id', $customer->id)->orderBy('id', 'DESC')->get() : collect();
+        $customers = Customer::where('user_id', $userId)->get();
+        $lastCustomer = Customer::orderBy('id', 'desc')->first();
+        $lastCode = $lastCustomer ? $lastCustomer->code : null;
+        $nextCode = $this->generateNextCustomerCode($lastCode);
+        return view('customers.index', compact('customers', 'mandatorySavings', 'nextCode'));
     }
 
-    // Method untuk menampilkan data keform
-    public function edit($id) {
-        $customer = Customer::find($id);
-        return view('customers.edit',compact('customer'));
+    public function edit(Customer $customer)
+    {
+        return view('customers.edit_modal', compact('customer'));
     }
 
-    // Method untuk mengubah data
-    public function update(Request $request) {
-        $this->validate($request, [
+    public function update(Request $request, Customer $customer)
+    {
+        $validatedData = $request->validate([
+            'image' => 'image|file',
             'name' => 'required|max:30',
-            'phone' => 'numeric',
+            'gender' => 'required',
             'address' => 'required',
+            'phone' => 'nullable|numeric',
         ]);
 
-        // ORM --> UPDATE/SAVE
-        $customer = Customer::find($request->id);
-        $customer->name = $request->name;
-        $customer->phone = $request->phone;
-        $customer->address = $request->address;
-        
-        if ($customer->save()) {
-            return redirect()->route('customer.index')->with('success','Data Berhasil Disimpan');
+        if (!isset($validatedData['user_id'])) {
+            $validatedData['user_id'] = auth()->user()->id;
+        }
+
+        if ($request->file('image')) {
+            if ($customer->image) {
+                Storage::disk('public')->delete($customer->image);
+            }
+            $validatedData['image'] = $request->file('image')->store('profile');
+        }
+
+        $customer->update($validatedData);
+
+        return redirect(route('customer.index'))->with('success', 'Data nasabah berhasil diupdate!');
+    }
+
+
+    public function destroy($id)
+    {
+        $customer = Customer::find($id);
+
+        if ($customer->delete()) {
+            return redirect()->route('customer.index')->with('success', "Data nasabah berhasil dihapus!");
         } else {
-            dd('Data Gagal Disimpan');
+            return redirect()->route('customer.index')->with('error', 'Terjadi kesalahan saat menghapus data nasabah.');
         }
     }
 
-    // Method untuk menghapus data 
-    public function destroy($id) {
-        $customer = Customer::find($id);
+    private function generateNextCustomerCode($lastCode)
+    {
+        $prefix = 'N';
 
-        if($customer->delete()) {
-            return redirect()->route('customer.index')->with('success','Data berhasil Dihapus');
+        if ($lastCode) {
+            $lastNumber = (int) substr($lastCode, 1);
+            $nextNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
         } else {
-            dd('Data Gagal Disimpan');
+            $nextNumber = '001';
         }
+
+        return $prefix . $nextNumber;
     }
 }

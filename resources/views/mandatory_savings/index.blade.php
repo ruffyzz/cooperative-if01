@@ -1,38 +1,29 @@
 @extends('layouts.main')
 @section('content')
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-    <div class="card">
-        <div class="card-header">
-            <a href="{{ route('mandatory-saving.create') }}" class="btn btn-success float-end"> Tambah Data</a>
-        </div>
-        <div class="card-body">
-            <table class="table table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Tanggal Bayar</th>
-                        <th>Kode Nasabah</th>
-                        <th>Nama Nasabah</th>
-                        <th>Jumlah</th>
+    <div class="d-flex justify-content-center align-items-center text-center pt-5 pb-5">
+        <h1>Tabungan Nasabah</h1>
+    </div>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($mandatorySavings as $ms)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $ms->date }}</td>
-                            <td>{{ $ms->customer->code }}</td>
-                            <td>{{ $ms->customer->name }}</td>
-                            <td>{{ $ms->amount }}</td>
+    <div class="card p-2">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead style="background-color: #D8B06D;color:white;">
+                        <tr class="text-center">
+                            <th>Tanggal Bayar</th>
+                            <th>Jumlah</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="text-center">
+                        @foreach ($mandatorySavings as $ms)
+                            <tr>
+                                <td>{{ $ms->date }}</td>
+                                <td>Rp {{ number_format($ms->amount) }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection
